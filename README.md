@@ -25,11 +25,11 @@ El proyecto utiliza listas enlazadas, pilas y colas implementadas por el grupo.
 
 ## Organozacion del proyecto
 
-- En conjunto: README, pruebas, informe y presentacion  
+- En conjunto: README, pruebas, informe y presentacion <br>
 
-- Eban: inventario.c y objetos.c. Se encargará de programar la lógica base de los ítems en objetos.c y de construir el sistema de catálogo en inventario.c para agregar, buscar, equipar y eliminar objetos.
+- Eban: inventario.c y objetos.c. Se encargará de programar la lógica base de los ítems en objetos.c y de construir el sistema de catálogo en inventario.c para agregar, buscar, equipar y eliminar objetos. <br>
 
-- Yanira: historial.c y personajes.c. Se encarga de la responsabilidad central es historial.c, donde registrará los eventos y validará la función de extraer solo para deshacer objetos descartados. Además se encarga de personajes.c, que gestiona los atributos (vida, ataque, defensa) y el estado actual del protagonista.
+- Yanira: historial.c y personajes.c. Se encarga de la responsabilidad central es historial.c, donde registrará los eventos y validará la función de extraer solo para deshacer objetos descartados. Además se encarga de personajes.c, que gestiona los atributos (vida, ataque, defensa) y el estado actual del protagonista.<br>
 
 - Martina: combate.c y archivos.c. se encarga de desarrollar combate.c forzando el orden de enfrentamiento de los enemigos según su aparición. Además, se encarga de archivos.c, construyendo la lógica para escribir y guardar el progreso del juego en un archivo y cargarlo al reiniciar.
 
