@@ -41,15 +41,17 @@ void inicializar_cola(cola_enemigo* cola);
 int vacia(cola_enemigo* cola);
 
 /**
- * @brief Agrega a la cola
+ * @brief Agrega a la cola a los enemigos
  * 
  * @param cola 
+ * @param id 
+ * @param nombre 
  * @param vida 
- * @param tipo 
+ * @param ataque 
  * 
  * @author Martina Marquez
  */
-void encolar(cola_enemigo* cola, int vida, int tipo);
+void encolar(cola_enemigo* cola, int id, const char* nombre, int vida, int ataque);
 
 /**
  * @brief Quita de la cola

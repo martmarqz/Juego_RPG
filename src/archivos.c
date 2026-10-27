@@ -1,12 +1,10 @@
 #include <stdio.h>
-#include "archivos.h"
-
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "archivos.h"
+#include "inventario.h"
 
-int guardar_partida(Character* jugador, const char* ruta_archivo) 
+int guardar_partida(Character* jugador, Inventory inv, const char* ruta_archivo) 
 {
     FILE* archivo = fopen(ruta_archivo, "w");
     if (archivo == NULL) 
@@ -17,18 +15,28 @@ int guardar_partida(Character* jugador, const char* ruta_archivo)
 
     fprintf(archivo, "%s\n", jugador->name);
     fprintf(archivo, "%d %d %d\n", jugador->life, jugador->attack, jugador->defend);
+    PtrToNode actual = inv->next;
+    while (actual != NULL) 
+    {
+        fprintf(archivo, "%d %d %d %s\n", actual->objeto.id, actual->objeto.tipo, actual->objeto.valor_efecto, actual->objeto.nombre);
+        actual = actual->next;
+    }
+    fprintf(archivo, "-1\n"); 
     fclose(archivo);
     printf("Partida guardada exitosamente en '%s'.\n", ruta_archivo);
-    return 1; // Éxito
+    return 1; 
 }
 
-int cargar_partida(Character* jugador, const char* ruta_archivo) 
+int cargar_partida(Character* jugador, Inventory inv, const char* ruta_archivo) 
 {
+    int id_obj, tipo_obj, valor_obj;
+    char nombre_obj[100];
+
     FILE* archivo = fopen(ruta_archivo, "r");
     if (archivo == NULL) 
     {
         printf("Error: No se encontro ninguna partida guardada en '%s'.\n", ruta_archivo);
-        return 0; // Falla
+        return 0;
     }
 
     char buffer_nombre[100];
@@ -60,6 +68,13 @@ int cargar_partida(Character* jugador, const char* ruta_archivo)
         return 0;
     }
 
+    while (fscanf(archivo, "%d", &id_obj) == 1 && id_obj != -1) 
+    {
+    fscanf(archivo, "%d %d %99s", &tipo_obj, &valor_obj, nombre_obj);
+    Objeto nuevo_obj = Crear_Objeto(id_obj, nombre_obj, tipo_obj, valor_obj);
+    Insertar_Objeto_en_el_Inventario(inv, nuevo_obj);
+    }
+    
     fclose(archivo);
     printf("Partida cargada exitosamente.\n");
     return 1;
