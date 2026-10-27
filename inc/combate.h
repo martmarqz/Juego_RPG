@@ -90,6 +90,6 @@ int contar_enemigos_espera(cola_enemigo* cola);
  * 
  * @author Martina Marquez
  */
-void iniciar_combate(Character* jugador, cola_enemigo* cola);
+void iniciar_combate(Character* jugador, Inventory inv, cola_enemigo* cola);
 
 #endif

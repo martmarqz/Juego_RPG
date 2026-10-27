@@ -70,11 +70,11 @@ int cargar_partida(Character* jugador, Inventory inv, const char* ruta_archivo)
 
     while (fscanf(archivo, "%d", &id_obj) == 1 && id_obj != -1) 
     {
-    fscanf(archivo, "%d %d %99s", &tipo_obj, &valor_obj, nombre_obj);
-    Objeto nuevo_obj = Crear_Objeto(id_obj, nombre_obj, tipo_obj, valor_obj);
-    Insertar_Objeto_en_el_Inventario(inv, nuevo_obj);
+        fscanf(archivo, "%d %d %99s", &tipo_obj, &valor_obj, nombre_obj);
+        Objeto nuevo_obj = Crear_Objeto(id_obj, nombre_obj, tipo_obj, valor_obj);
+        Insertar_Objeto_en_el_Inventario(inv, nuevo_obj);
     }
-    
+
     fclose(archivo);
     printf("Partida cargada exitosamente.\n");
     return 1;
