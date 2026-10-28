@@ -1,7 +1,9 @@
 #include "inventario.h"
 
-/*Aqui se crea el espacio de memoria del inventario, en caso de que ya 
-haya uno existentese borra y crea el espacio de memoria desde cero*/
+/**
+ * @brief Aqui se crea el espacio de memoria del inventario, en caso de que ya 
+ * haya uno existentese borra y crea el espacio de memoria desde cero
+ */
 Inventory Crear_inventario_vacio(Inventory inv)
 {
     if (inv!=NULL) 
@@ -21,8 +23,10 @@ Inventory Crear_inventario_vacio(Inventory inv)
     return header;
 }
 
-/*esta funcion lo que hace es, primero verificar si el inventario existe,luego crea 
-un espacio de memoria, e inserta el objeto que en este caso el jugador guardo*/
+/**
+ * @brief esta funcion lo que hace es, primero verificar si el inventario existe,luego crea 
+ * un espacio de memoria, e inserta el objeto que en este caso el jugador guardo
+ */
 int Insertar_Objeto_en_el_Inventario(Inventory inv, Objeto obj)
 {
     if (inv==NULL) 
@@ -46,8 +50,10 @@ int Insertar_Objeto_en_el_Inventario(Inventory inv, Objeto obj)
     return 1;
 }
 
-/*al igual que la funcion anterior, se verifica si existe el inventario, luego busca
-elimina y el item seleccionado*/
+/**
+ * @brief al igual que la funcion anterior, se verifica si existe el inventario, luego busca
+ * elimina y el item seleccionado
+ */
 int Borrar_Objeto_del_Inventario(Inventory inv, int id)
 {
     if (inv==NULL || Esta_vacio_el_Inventario(inv)) 
@@ -77,7 +83,11 @@ int Borrar_Objeto_del_Inventario(Inventory inv, int id)
     return 0;
 }
 
-//verifica si el inventario esta vacio
+/**
+ * @brief verifica si el inventario esta vacio
+ * @param inv Puntero al inventario
+ * @return int 1 si está vacío, 0 en caso contrario
+ */
 int Esta_vacio_el_Inventario(Inventory inv)
 {
     if (inv==NULL || inv->next ==NULL) 
@@ -86,7 +96,11 @@ int Esta_vacio_el_Inventario(Inventory inv)
     }
     return 0;
 }
-//destruye el inventario, si no hay inventario no hace nada
+
+/**
+ * @brief destruye el inventario, si no hay inventario no hace nada
+ * @param inv Puntero al inventario
+ */
 void Destruir_Inventario(Inventory inv)
 {
     if (inv==NULL) 
@@ -108,7 +122,10 @@ void Destruir_Inventario(Inventory inv)
     free(inv);
 }
 
-//Muestra el inventario completo con todos sus objetos
+/**
+ * @brief Muestra el inventario completo con todos sus objetos
+ * @param inv Puntero al inventario
+ */
 void Mostrar_Inventario(Inventory inv)
 {
     if (Esta_vacio_el_Inventario(inv)) {
@@ -127,6 +144,12 @@ void Mostrar_Inventario(Inventory inv)
     printf("==============================\n");
 }
 
+/**
+ * @brief 
+ * @param inv Puntero al inventario
+ * @param id Identificador único del objeto
+ * @return Objeto* Puntero al objeto encontrado o NULL si no existe
+ */
 Objeto* Encontrar_por_id(Inventory inv, int id)
 {
     if (Esta_vacio_el_Inventario(inv)) {
@@ -144,6 +167,12 @@ Objeto* Encontrar_por_id(Inventory inv, int id)
     return NULL;
 }
 
+/**
+ * @brief 
+ * @param inv Puntero al inventario
+ * @param nombre Nombre del objeto a buscar
+ * @return Objeto* Puntero al objeto encontrado o NULL si no existe
+ */
 Objeto* Encontrar_por_nombre(Inventory inv, const char* nombre)
 {
     if (Esta_vacio_el_Inventario(inv) || nombre == NULL) {
