@@ -57,21 +57,18 @@ Stack historial_deshacer_accion(Stack s){
 
 }
 
-Stack historial_registrar_accion(Stack s, char* desc, int tipo, char* nombre){
+Stack historial_registrar_accion(Stack s, char* desc, int tipo){
     Accion nueva;
     nueva.tipo = tipo;
     nueva.desc = malloc(strlen(desc) + 1);
-    nueva.nombre = malloc(strlen(nombre) + 1);
 
-    if (nueva.desc == NULL || nueva.nombre == NULL){
+    if (nueva.desc == NULL){
         printf("Error: Falta de memoria\n");
         free(nueva.desc);     // free(NULL) es seguro
-        free(nueva.nombre);
         return s;
     }
 
     strcpy(nueva.desc, desc);
-    strcpy(nueva.nombre, nombre);
 
     historial_push(nueva, s);
     return s;
@@ -110,7 +107,7 @@ void historial_print(Stack s){
 
     while (nodo != NULL)
     {
-        printf("%2d. [%s] Descripción: %s\n", i, nodo->accion.nombre, nodo->accion.desc);
+        printf("%2d.\tTipo: %d\tDescripción: %s\n", i, nodo->accion.tipo,nodo->accion.desc);
         nodo = nodo->siguiente;
         i++;
     }

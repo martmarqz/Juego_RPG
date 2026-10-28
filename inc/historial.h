@@ -43,7 +43,7 @@ Stack historial_pop(Stack s);
  * @param tipo 
  * @return Stack 
  */
-Stack historial_registrar_accion(Stack s, char* desc, int tipo, char* nombre);
+Stack historial_registrar_accion(Stack s, char* desc, int tipo);
 
 /**
  * @brief 

@@ -129,7 +129,7 @@ void iniciar_combate(Character* jugador, Inventory inv, cola_enemigo* cola)
 
             switch (opcion) 
             {
-                case 1:
+                case 1: 
                     printf("Atacas al %s: %d de dano.\n", enemigo_actual.nombre, jugador->attack);
                     enemigo_actual.vida -= jugador->attack;
                     
@@ -156,7 +156,19 @@ void iniciar_combate(Character* jugador, Inventory inv, cola_enemigo* cola)
                     if (obj != NULL) 
                     {
                         printf("Usas %s.\n", obj->nombre);
-        
+                        if(obj->tipo==1){
+                            jugador->attack=obj->valor_efecto;
+                        }
+                        if(obj->tipo==2){
+                            jugador->life+=obj->valor_efecto;
+                            if(jugador->life>vida_max)
+                            {
+                                jugador->life=vida_max;
+                            }
+                        }
+                        if(obj->tipo==3){
+                            jugador->defend=obj->valor_efecto;
+                        }
                         Borrar_Objeto_del_Inventario(inv, id_obj);
                     } 
                     else 
