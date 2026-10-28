@@ -23,6 +23,9 @@ typedef struct _character
     int defend;
 } Character;
 
+
+
+
 Character character_create(char* name);
 void character_print(Character character);
 #endif

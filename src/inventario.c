@@ -158,6 +158,7 @@ void Mostrar_Inventario(Inventory inv)
     while (actual!=NULL) {
         Mostrar_Objeto(actual->objeto);
         actual=actual->next;
+        
     }
     printf("==============================\n");
 }
