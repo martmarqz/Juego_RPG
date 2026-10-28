@@ -1,6 +1,7 @@
 #ifndef COMBATE_H
 #define COMBATE_H
 #include "personajes.h"
+#include "inventario.h"
 
 //========== STRUCTS ==========
 
