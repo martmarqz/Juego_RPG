@@ -9,6 +9,8 @@ OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 EXEC = rpg_game
 
+.PHONY: all run clean
+
 all: $(EXEC)
 
 $(EXEC): $(OBJS)
@@ -19,6 +21,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
+
+run: $(EXEC)
+	./$(EXEC)
 
 clean:
 	rm -rf $(OBJ_DIR) $(EXEC)
