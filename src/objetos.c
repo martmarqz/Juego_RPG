@@ -7,6 +7,8 @@
  * @param tipo Categoría del objeto (ej. arma, poción)
  * @param valor_efecto Valor numérico del efecto del objeto (ataque, curación, etc.)
  * @return Objeto La estructura del objeto creada e inicializada
+ * 
+ * @author Eban Delgado
  */
 Objeto Crear_Objeto(int id, const char* nombre, int tipo, int valor_efecto)
 {
@@ -30,6 +32,8 @@ Objeto Crear_Objeto(int id, const char* nombre, int tipo, int valor_efecto)
 /**
  * @brief Muestra por pantalla el objeto y sus datos
  * @param obj Objeto que se desea mostrar en consola
+ * 
+ * @author Eban Delgado
  */
 void Mostrar_Objeto(Objeto obj)
 {
@@ -39,6 +43,8 @@ void Mostrar_Objeto(Objeto obj)
 /**
  * @brief Borra un objeto
  * @param obj Objeto cuya memoria interna (como su nombre) se va a liberar
+ * 
+ * @author Eban Delgado
  */
 void Borrar_Objeto(Objeto obj)
 {

@@ -5,6 +5,8 @@
  * haya uno existentese borra y crea el espacio de memoria desde cero
  * @param inv Puntero al inventario actual
  * @return Inventory Puntero al inventario inicializado o limpio
+ * 
+ * @author Eban Delgado
  */
 Inventory Crear_inventario_vacio(Inventory inv)
 {
@@ -31,6 +33,8 @@ Inventory Crear_inventario_vacio(Inventory inv)
  * @param inv Puntero al inventario
  * @param obj Objeto que se desea insertar
  * @return int 1 si fue exitoso, 0 en caso de error
+ * 
+ * @author Eban Delgado
  */
 int Insertar_Objeto_en_el_Inventario(Inventory inv, Objeto obj)
 {
@@ -61,6 +65,8 @@ int Insertar_Objeto_en_el_Inventario(Inventory inv, Objeto obj)
  * @param inv Puntero al inventario
  * @param id Identificador único del objeto a borrar
  * @return int 1 si se eliminó con éxito, 0 si no se encontró
+ * 
+ * @author Eban Delgado
  */
 int Borrar_Objeto_del_Inventario(Inventory inv, int id)
 {
@@ -95,6 +101,8 @@ int Borrar_Objeto_del_Inventario(Inventory inv, int id)
  * @brief Verifica si el inventario esta vacio
  * @param inv Puntero al inventario
  * @return int 1 si está vacío, 0 en caso contrario
+ * 
+ * @author Eban Delgado
  */
 int Esta_vacio_el_Inventario(Inventory inv)
 {
@@ -133,6 +141,8 @@ void Destruir_Inventario(Inventory inv)
 /**
  * @brief Muestra el inventario completo con todos sus objetos
  * @param inv Puntero al inventario
+ * 
+ * @author Eban Delgado
  */
 void Mostrar_Inventario(Inventory inv)
 {
@@ -157,6 +167,8 @@ void Mostrar_Inventario(Inventory inv)
  * @param inv Puntero al inventario
  * @param id Identificador único del objeto
  * @return Objeto* Puntero al objeto encontrado o NULL si no existe
+ * 
+ * @author Eban Delgado
  */
 Objeto* Encontrar_por_id(Inventory inv, int id)
 {
@@ -180,6 +192,8 @@ Objeto* Encontrar_por_id(Inventory inv, int id)
  * @param inv Puntero al inventario
  * @param nombre Nombre del objeto a buscar
  * @return Objeto* Puntero al objeto encontrado o NULL si no existe
+ * 
+ * @author Eban Delgado
  */
 Objeto* Encontrar_por_nombre(Inventory inv, const char* nombre)
 {
