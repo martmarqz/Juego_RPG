@@ -1,12 +1,15 @@
 #ifndef COMBATE_H
 #define COMBATE_H
+#include "personajes.h"
 
 //========== STRUCTS ==========
 
 typedef struct nodo_enemigo 
 {
     int vida;
-    int tipo;
+    int id;
+    int ataque;
+    char nombre[50];
     struct nodo_enemigo *siguiente;
 } nodo_enemigo; 
 
@@ -38,15 +41,17 @@ void inicializar_cola(cola_enemigo* cola);
 int vacia(cola_enemigo* cola);
 
 /**
- * @brief Agrega a la cola
+ * @brief Agrega a la cola a los enemigos
  * 
  * @param cola 
+ * @param id 
+ * @param nombre 
  * @param vida 
- * @param tipo 
+ * @param ataque 
  * 
  * @author Martina Marquez
  */
-void encolar(cola_enemigo* cola, int vida, int tipo);
+void encolar(cola_enemigo* cola, int id, const char* nombre, int vida, int ataque);
 
 /**
  * @brief Quita de la cola
@@ -66,5 +71,25 @@ nodo_enemigo desencolar(cola_enemigo* cola);
  * @author Martina Marquez
  */
 void liberar_cola(cola_enemigo* cola);
+
+/**
+ * @brief Cuenta los enemigos en la cola 
+ * 
+ * @param cola 
+ * @return int 
+ * 
+ * @author Martina Marquez
+ */
+int contar_enemigos_espera(cola_enemigo* cola);
+
+/**
+ * @brief Inicia y maneja el combate por turnos
+ * 
+ * @param jugador 
+ * @param cola 
+ * 
+ * @author Martina Marquez
+ */
+void iniciar_combate(Character* jugador, Inventory inv, cola_enemigo* cola);
 
 #endif
