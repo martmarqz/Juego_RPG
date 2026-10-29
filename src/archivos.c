@@ -3,8 +3,9 @@
 #include <string.h>
 #include "archivos.h"
 #include "inventario.h"
+#include "historial.h" 
 
-int guardar_partida(Character* jugador, Inventory inv, const char* ruta_archivo) 
+int guardar_partida(Character* jugador, Inventory inv, Stack historial, char* ruta_archivo) 
 {
     FILE* archivo = fopen(ruta_archivo, "w");
     if (archivo == NULL) 
@@ -15,6 +16,7 @@ int guardar_partida(Character* jugador, Inventory inv, const char* ruta_archivo)
 
     fprintf(archivo, "%s\n", jugador->name);
     fprintf(archivo, "%d %d %d\n", jugador->life, jugador->attack, jugador->defend);
+    
     PtrToNode actual = inv->next;
     while (actual != NULL) 
     {
@@ -22,12 +24,22 @@ int guardar_partida(Character* jugador, Inventory inv, const char* ruta_archivo)
         actual = actual->next;
     }
     fprintf(archivo, "-1\n"); 
+
+    // Guardado del historial
+    Ptr_nodo_historial nodo_hist = historial->siguiente;
+    while (nodo_hist != NULL) 
+    {
+        fprintf(archivo, "%d\n%s\n", nodo_hist->accion.tipo, nodo_hist->accion.desc);
+        nodo_hist = nodo_hist->siguiente;
+    }
+    fprintf(archivo, "-1\n"); 
+
     fclose(archivo);
     printf("Partida guardada exitosamente en '%s'.\n", ruta_archivo);
     return 1; 
 }
 
-int cargar_partida(Character* jugador, Inventory inv, const char* ruta_archivo) 
+int cargar_partida(Character* jugador, Inventory inv, Stack historial, char* ruta_archivo) 
 {
     int id_obj, tipo_obj, valor_obj;
     char nombre_obj[100];
@@ -73,6 +85,17 @@ int cargar_partida(Character* jugador, Inventory inv, const char* ruta_archivo)
         fscanf(archivo, "%d %d %99s", &tipo_obj, &valor_obj, nombre_obj);
         Objeto nuevo_obj = Crear_Objeto(id_obj, nombre_obj, tipo_obj, valor_obj);
         Insertar_Objeto_en_el_Inventario(inv, nuevo_obj);
+    }
+
+    int tipo_accion;
+    char desc_accion[256];
+    while (fscanf(archivo, "%d\n", &tipo_accion) == 1 && tipo_accion != -1) 
+    {
+        if (fgets(desc_accion, sizeof(desc_accion), archivo) != NULL) 
+        {
+            desc_accion[strcspn(desc_accion, "\n")] = 0; 
+            historial_registrar_accion(historial, desc_accion, tipo_accion);
+        }
     }
 
     fclose(archivo);

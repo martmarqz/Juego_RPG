@@ -3,6 +3,7 @@
 #include <string.h>
 #include "combate.h"
 #include "inventario.h"
+#include "historial.h"
 
 void inicializar_cola(cola_enemigo* cola)
 {
@@ -97,7 +98,7 @@ int contar_enemigos_espera(cola_enemigo* cola)
     return contador;
 }
 
-void iniciar_combate(Character* jugador, Inventory inv, cola_enemigo* cola) 
+void iniciar_combate(Character* jugador, Inventory inv, cola_enemigo* cola, Stack historial)
 {
     int vida_max = jugador->life; 
     int enemigos_espera;
@@ -155,20 +156,29 @@ void iniciar_combate(Character* jugador, Inventory inv, cola_enemigo* cola)
 
                     if (obj != NULL) 
                     {
-                        printf("Usas %s.\n", obj->nombre);
-                        if(obj->tipo==1){
-                            jugador->attack=obj->valor_efecto;
+                        if(obj->tipo == 1)
+                        {
+                            printf("Equipas %s. Ataque: %d -> ", obj->nombre, jugador->attack);
+                            jugador->attack += obj->valor_efecto; 
+                            printf("%d.\n", jugador->attack);
                         }
-                        if(obj->tipo==2){
-                            jugador->life+=obj->valor_efecto;
-                            if(jugador->life>vida_max)
+                        else if(obj->tipo == 2)
+                        {
+                            printf("Usas %s: recuperas %d PV. ", obj->nombre, obj->valor_efecto);
+                            jugador->life += obj->valor_efecto;
+                            if(jugador->life > vida_max)
                             {
-                                jugador->life=vida_max;
+                                jugador->life = vida_max;
                             }
+                            printf("Aria: %d/%d PV.\n", jugador->life, vida_max);
                         }
-                        if(obj->tipo==3){
-                            jugador->defend=obj->valor_efecto;
+                        else if(obj->tipo == 3)
+                        {
+                            printf("Equipas %s. Defensa: %d -> ", obj->nombre, jugador->defend);
+                            jugador->defend += obj->valor_efecto;
+                            printf("%d.\n", jugador->defend);
                         }
+                        
                         Borrar_Objeto_del_Inventario(inv, id_obj);
                     } 
                     else 
@@ -206,11 +216,95 @@ void iniciar_combate(Character* jugador, Inventory inv, cola_enemigo* cola)
             {
                 printf("Se retira de la cola de combate.\n");
             }
+            char mensaje_historial[100];
+            sprintf(mensaje_historial, "Se derroto al enemigo %s", enemigo_actual.nombre);
+            historial_registrar_accion(historial, mensaje_historial, 1);
         }
     }
 
     if (jugador->life > 0) 
     {
         printf("Combate terminado!\n");
+    }
+}
+
+void enemigo_facil(cola_enemigo* cola, int id)
+{
+    switch (rand() % 5)
+    {
+        case 0: 
+            encolar(cola, id, "Slime", 12, 3); 
+            break;
+        case 1: 
+            encolar(cola, id, "Rata gigante", 10, 3); 
+            break;
+        case 2: 
+            encolar(cola, id, "Goblin", 15, 4); 
+            break;
+        case 3: 
+            encolar(cola, id, "Murciélago", 14, 4); 
+            break;
+        default: 
+            encolar(cola, id, "Lobo", 18, 5); 
+            break;
+    }
+}
+
+void enemigo_medio(cola_enemigo* cola, int id)
+{
+    switch (rand() % 5)
+    {
+        case 0: 
+            encolar(cola, id, "Bandido", 22, 6); 
+            break;
+        case 1: 
+            encolar(cola, id, "Orco", 25, 6);   
+            break;
+        case 2: 
+            encolar(cola, id, "Esqueleto", 24, 7); 
+            break;
+        case 3: 
+            encolar(cola, id, "Lobo huargo", 28, 7); 
+            break;
+        default: 
+            encolar(cola, id, "Troll", 30, 8); 
+            break;
+    }
+}
+
+void enemigo_dificil(cola_enemigo* cola, int id)
+{
+    switch (rand() % 5)
+    {
+        case 0: 
+            encolar(cola, id, "Espectro", 35, 9); 
+            break;
+        case 1: 
+            encolar(cola, id, "Caballero oscuro", 40, 10); 
+            break;
+        case 2: 
+            encolar(cola, id, "Gólem", 42, 10); 
+            break;
+        case 3: 
+            encolar(cola, id, "Minotauro", 45, 11); 
+            break;
+        default: 
+            encolar(cola, id, "Dragón joven", 55, 12); 
+            break;
+    }
+}
+
+void generar_enemigos_zona(cola_enemigo* cola, int zona)
+{
+    int cantidad = rand() % 3;
+
+    for (int i = 1; i <= cantidad; i++)
+    {
+        if (zona == 1)
+            enemigo_facil(cola, i);
+        else if (zona == 2)
+            enemigo_medio(cola, i);
+        else
+            enemigo_dificil(cola, i);
     }
 }

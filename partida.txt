@@ -1,3 +1,8 @@
 Aria
-5 5 3
+4 15 3
+-1
+2
+avanzar zona
+1
+Se derroto al enemigo Murciélago
 -1

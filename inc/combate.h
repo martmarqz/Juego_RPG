@@ -2,6 +2,7 @@
 #define COMBATE_H
 #include "personajes.h"
 #include "inventario.h"
+#include "historial.h"
 
 //========== STRUCTS ==========
 
@@ -88,9 +89,50 @@ int contar_enemigos_espera(cola_enemigo* cola);
  * 
  * @param jugador 
  * @param cola 
+ * @param inv
+ * @param historial
  * 
  * @author Martina Marquez
  */
-void iniciar_combate(Character* jugador, Inventory inv, cola_enemigo* cola);
+void iniciar_combate(Character* jugador, Inventory inv, cola_enemigo* cola, Stack historial);
+/**
+ * @brief  genera enemigos dependiendo la dificultad de la zona
+ * 
+ * @param cola 
+ * @param zona 
+ * 
+ * @author Martina Marquez
+ */
+void generar_enemigos_zona(cola_enemigo* cola, int zona);
+
+/**
+ * @brief escoge a enemigos dificiles
+ * 
+ * @param cola 
+ * @param id
+ * 
+ * @author Martina Marquez 
+ */
+void enemigo_dificil(cola_enemigo* cola, int id);
+
+/**
+ * @brief escoge a enemigos nivel medio
+ * 
+ * @param cola 
+ * @param id 
+ * 
+ * @author Martina Marquez
+ */
+void enemigo_medio(cola_enemigo* cola, int id);
+
+/**
+ * @brief 
+ * 
+ * @param cola 
+ * @param id 
+ * 
+ * @author Martina Marquez
+ */
+void enemigo_facil(cola_enemigo* cola, int id);
 
 #endif

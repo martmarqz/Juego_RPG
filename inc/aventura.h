@@ -16,7 +16,7 @@ typedef struct _accion
     char* desc;
 } Accion;
 
-void explorar_zona(int N);
+void explorar_zona(int N, Inventory inv);
 Objeto obtener_objetos(Inventory inv);
 //void encontrar_enemigos();
 //int elegir_zona();

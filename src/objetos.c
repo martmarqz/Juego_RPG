@@ -53,3 +53,26 @@ void Borrar_Objeto(Objeto obj)
         free(obj.nombre);
     }
 }
+
+Objeto datos_objetos(int obj)
+{
+    Objeto objeto;
+
+    if(obj<=40){
+        objeto=Crear_Objeto(1,"Espada corta de cobre",1,10);
+    }
+    else if(obj<=70){
+        objeto=Crear_Objeto(2,"Arco primitivo",1,10);
+    }
+    else if(obj<=85){
+        objeto=Crear_Objeto(3,"Pocion curativa menor",2,2);//tipo 2 es un consumible de cura, y el ultimo valor es lo que curara, asi que cambiara  segun la vida maxima
+    }
+    else if(obj<=95){
+        objeto=Crear_Objeto(4,"Espada larga de hierro",1,25);
+    }
+    else if(obj<=100){
+        objeto=Crear_Objeto(5,"Cota de malla",3,8);
+    }
+
+    return objeto;
+}

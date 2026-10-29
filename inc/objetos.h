@@ -18,4 +18,6 @@ void Mostrar_Objeto(Objeto obj);
 
 void Borrar_Objeto(Objeto obj);
 
+Objeto datos_objetos(int obj);
+
 #endif
