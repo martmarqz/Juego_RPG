@@ -87,23 +87,15 @@ void iniciar_juego()
                     printf("Entras a las Ruinas Antiguas...\n");
                 }
 
-                explorar_zona(3, inventario);
+                explorar_zona(3, inventario, zona, historial, &jugador);
 
-                printf("Un grupo de enemigos te bloquea el paso!\n");
-                
-                cola_enemigo cola_combate;
-                inicializar_cola(&cola_combate);
-                generar_enemigos_zona(&cola_combate, zona);
-                iniciar_combate(&jugador, inventario, &cola_combate, historial);
-                liberar_cola(&cola_combate); 
-                
-                if (jugador.life <= 0) 
-                {
-                    printf("\nFin del juego. Has muerto.\n");
-                    printf("\nResumen de tu aventura:\n");  
-                    historial_print(historial);
-                    opcion = 5; 
+                if (jugador.life <= 0){
+                        printf("\nFin del juego. Has muerto.\n");
+                        printf("\nResumen de tu aventura:\n");  
+                        historial_print(historial);
+                        opcion = 5; 
                 }
+
                 historial_registrar_accion(historial,"avanzar zona",2);
                 break;
 
@@ -113,8 +105,8 @@ void iniciar_juego()
                 break;
 
             case 4:
-                historial_print(historial);
                 historial_registrar_accion(historial,"Mostrar historial",4);
+                historial_print(historial);
                 
                 break;
 

@@ -1,7 +1,30 @@
 Aria
-2 25 3
-1 1 10 Espada
+1 5 3
+1 1 10 Espada corta de cobre
+2 1 10 Arco
 -1
-4
-Mostrar historial
+2
+avanzar zona
+2
+avanzar zona
+1
+estado personaje
+2
+avanzar zona
+2
+avanzar zona
+1
+estado personaje
+2
+avanzar zona
+1
+estado personaje
+1
+Se derroto al enemigo Slime
+1
+Se derroto al enemigo Rata gigante
+1
+Se derroto al enemigo Goblin
+2
+avanzar zona
 -1

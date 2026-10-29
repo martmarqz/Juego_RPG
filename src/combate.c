@@ -296,7 +296,7 @@ void enemigo_dificil(cola_enemigo* cola, int id)
 
 void generar_enemigos_zona(cola_enemigo* cola, int zona)
 {
-    int cantidad = rand() % 3;
+    int cantidad = rand() % 3+1;
 
     for (int i = 1; i <= cantidad; i++)
     {

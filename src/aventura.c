@@ -7,10 +7,9 @@
  */
 
 
-void explorar_zona(int N, Inventory inv) // < N = pasos para generar un evento
+void explorar_zona(int N, Inventory inv, int zona, Stack s, Character *jugador) // < N = pasos para generar un evento
 {
-    int pasos = 0;
-    char continuar;
+    int pasos = 0, continuar;
 
     while(pasos < N)
     {
@@ -35,7 +34,7 @@ void explorar_zona(int N, Inventory inv) // < N = pasos para generar un evento
 
         if(pasos == N) //< Se genera un evento y se rompe el ciclo
         { 
-            int evento = 1; 
+            int evento = rand()%3+1;
             
             switch (evento)
             {
@@ -43,21 +42,40 @@ void explorar_zona(int N, Inventory inv) // < N = pasos para generar un evento
                     printf("¡Encuentras un objeto en el suelo!\n"); 
                     obtener_objetos(inv); // < Función obtener objeto
                     break;
+                    
                 case 2:
-                    printf("Encuentras enemigo\n"); // < Función encontrar enemigo
+                    printf("Un grupo de enemigos te bloquea el paso!\n");
+                    cola_enemigo cola_combate;
+                    inicializar_cola(&cola_combate);
+                    generar_enemigos_zona(&cola_combate, zona);
+                    iniciar_combate(jugador, inv, &cola_combate, s);
+                    liberar_cola(&cola_combate);
                     break;
                 case 3:
                     printf("No encuentras nada\n"); // < No pasa nada              
                     break;
             }
 
-            printf("¿Seguir explorando? (s/n) > ");
-            scanf(" %c", &continuar);
-            if (continuar == 's' || continuar == 'S') {
-                printf("Caminas entre los arboles. No encuentras nada.\n");
-            }
+            if (jugador->life <= 0)
+                break;
+
+            printf("¿Seguir explorando? 1.Si 2.No > ");
+            do
+            {
+                printf("(1-2) --> ");
+                if (scanf("%d", &continuar) != 1)
+                    continuar = 0;            
+                while (getchar() != '\n');
+
+                if (continuar < 1 || continuar > 2)
+                    printf("Rango invalido\n");
+            } while (continuar < 1 || continuar > 2);           
             
-            break;
+            if(continuar == 1)
+                pasos = 0;
+            else
+                break;
+
         }
     }
 

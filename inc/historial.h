@@ -1,10 +1,17 @@
 #ifndef HISTORIAL_H
 #define HISTORIAL_H
 
-#include "aventura.h"
 
 typedef struct _nodo_historial* Ptr_nodo_historial;
 typedef Ptr_nodo_historial Stack;
+
+typedef struct _accion
+{
+    int tipo;
+    char * nombre;
+    char* desc;
+} Accion;
+
 typedef struct _nodo_historial
 {
     Accion accion;
