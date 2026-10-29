@@ -1,8 +1,7 @@
 Aria
-4 15 3
+2 25 3
+1 1 10 Espada
 -1
-2
-avanzar zona
-1
-Se derroto al enemigo Murciélago
+4
+Mostrar historial
 -1

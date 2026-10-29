@@ -48,7 +48,7 @@ Stack historial_deshacer_accion(Stack s){
     if(s->siguiente->accion.tipo == 1){ //< Accion deshacer objeto
         printf("Se deshizo la acción. Recuperas el objeto descartado\n");
         historial_pop(s);
-        /*IMPORTANTE: falta hacer que recupere el objeto*/
+        
     }
     else
         printf("No es posible deshacer la última acción\n");
@@ -58,7 +58,7 @@ Stack historial_deshacer_accion(Stack s){
 }
 
 Stack historial_registrar_accion(Stack s, char* desc, int tipo){
-    Accion nueva;
+    Accion nueva = {0};
     nueva.tipo = tipo;
     nueva.desc = malloc(strlen(desc) + 1);
 

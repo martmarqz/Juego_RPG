@@ -9,7 +9,7 @@ OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 EXEC = rpg_game
 
-.PHONY: all run clean
+.PHONY: all run clean valgrind
 
 all: $(EXEC)
 
@@ -24,6 +24,9 @@ $(OBJ_DIR):
 
 run: $(EXEC)
 	./$(EXEC)
+
+valgrind: $(EXEC)
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXEC)
 
 clean:
 	rm -rf $(OBJ_DIR) $(EXEC)

@@ -132,5 +132,6 @@ void iniciar_juego()
     }
 
     Destruir_Inventario(inventario);
+    historial_liberar(historial);
     if (jugador.name != NULL) free(jugador.name);
 }
