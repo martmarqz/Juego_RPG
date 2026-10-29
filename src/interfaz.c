@@ -19,13 +19,13 @@ void limpiar_buffer()
 
 void iniciar_juego() 
 {
-    Character jugador = character_create("Aria");
-    Inventory inventario = Crear_inventario_vacio(NULL);
+    Jugador jugador = jugador_crear("Aria");
+    Inventario inventario = Crear_inventario_vacio(NULL);
     Stack historial = historial_inicializar();
     
     if (!cargar_partida(&jugador, inventario, historial, "partida.txt"))
     {
-        printf("Iniciando una nueva partida con el personaje %s.\n", jugador.name);
+        printf("Iniciando una nueva partida con el personaje %s.\n", jugador.nombre);
     }
 
     int opcion = 0;
@@ -33,7 +33,7 @@ void iniciar_juego()
     while (opcion != 5) 
     {
         printf("\n===== MENU DE JUEGO =====\n");
-        printf("Personaje: %s\n", jugador.name);
+        printf("Personaje: %s\n", jugador.nombre);
         printf("1. Ver personaje\n");
         printf("2. Explorar zona\n");
         printf("3. Inventario\n");
@@ -52,7 +52,7 @@ void iniciar_juego()
         { 
             case 1:
                 printf("\n--- ESTADO DEL PERSONAJE ---\n");
-                character_print(jugador);
+                jugador_print(jugador);
                 historial_registrar_accion(historial,"estado personaje",1);
                 break;
 
@@ -89,7 +89,7 @@ void iniciar_juego()
 
                 explorar_zona(3, inventario, zona, historial, &jugador);
 
-                if (jugador.life <= 0){
+                if (jugador.vida <= 0){
                         printf("\nFin del juego. Has muerto.\n");
                         printf("\nResumen de tu aventura:\n");  
                         historial_print(historial);
@@ -125,5 +125,5 @@ void iniciar_juego()
 
     Destruir_Inventario(inventario);
     historial_liberar(historial);
-    if (jugador.name != NULL) free(jugador.name);
+    if (jugador.nombre != NULL) free(jugador.nombre);
 }

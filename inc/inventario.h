@@ -7,28 +7,28 @@
 #include "objetos.h"
 
 typedef struct Node* PtrToNode;
-typedef PtrToNode Inventory;
-typedef PtrToNode InventoryElement;
+typedef PtrToNode Inventario;
+typedef PtrToNode InventarioElement;
 
 struct Node {
     Objeto objeto;
     PtrToNode next;
 };
 
-Inventory Crear_inventario_vacio(Inventory inv);
+Inventario Crear_inventario_vacio(Inventario inv);
 
-int Insertar_Objeto_en_el_Inventario(Inventory inv, Objeto obj);
+int Insertar_Objeto_en_el_Inventario(Inventario inv, Objeto obj);
 
-int Borrar_Objeto_del_Inventario(Inventory inv, int id);
+int Borrar_Objeto_del_Inventario(Inventario inv, int id);
 
-int Esta_vacio_el_Inventario(Inventory inv);
+int Esta_vacio_el_Inventario(Inventario inv);
 
-void Destruir_Inventario(Inventory inv);
+void Destruir_Inventario(Inventario inv);
 
-void Mostrar_Inventario(Inventory inv);
+void Mostrar_Inventario(Inventario inv);
 
-Objeto* Encontrar_por_id(Inventory inv, int id);
+Objeto* Encontrar_por_id(Inventario inv, int id);
 
-Objeto* Encontrar_por_nombre(Inventory inv, const char* nombre);
+Objeto* Encontrar_por_nombre(Inventario inv, const char* nombre);
 
 #endif

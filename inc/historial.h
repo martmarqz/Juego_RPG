@@ -1,6 +1,9 @@
 #ifndef HISTORIAL_H
 #define HISTORIAL_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 typedef struct _nodo_historial* Ptr_nodo_historial;
 typedef Ptr_nodo_historial Stack;

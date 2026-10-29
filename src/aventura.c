@@ -7,7 +7,7 @@
  */
 
 
-void explorar_zona(int N, Inventory inv, int zona, Stack s, Character *jugador) // < N = pasos para generar un evento
+void explorar_zona(int N, Inventario inv, int zona, Stack s, Jugador *jugador) // < N = pasos para generar un evento
 {
     int pasos = 0, continuar;
 
@@ -56,7 +56,7 @@ void explorar_zona(int N, Inventory inv, int zona, Stack s, Character *jugador) 
                     break;
             }
 
-            if (jugador->life <= 0)
+            if (jugador->vida <= 0)
                 break;
 
             printf("¿Seguir explorando? 1.Si 2.No > ");
@@ -82,7 +82,7 @@ void explorar_zona(int N, Inventory inv, int zona, Stack s, Character *jugador) 
     return;
 }
 
-Objeto obtener_objetos(Inventory inv)
+Objeto obtener_objetos(Inventario inv)
 {
     int probabilidad = (rand() % 100) + 1;
     

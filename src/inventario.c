@@ -4,11 +4,11 @@
  * @brief Aqui se crea el espacio de memoria del inventario, en caso de que ya 
  * haya uno existentese borra y crea el espacio de memoria desde cero
  * @param inv Puntero al inventario actual
- * @return Inventory Puntero al inventario inicializado o limpio
+ * @return Inventario Puntero al inventario inicializado o limpio
  * 
  * @author Eban Delgado
  */
-Inventory Crear_inventario_vacio(Inventory inv)
+Inventario Crear_inventario_vacio(Inventario inv)
 {
     if (inv!=NULL) 
     {
@@ -36,7 +36,7 @@ Inventory Crear_inventario_vacio(Inventory inv)
  * 
  * @author Eban Delgado
  */
-int Insertar_Objeto_en_el_Inventario(Inventory inv, Objeto obj)
+int Insertar_Objeto_en_el_Inventario(Inventario inv, Objeto obj)
 {
     if (inv==NULL) 
     {
@@ -68,7 +68,7 @@ int Insertar_Objeto_en_el_Inventario(Inventory inv, Objeto obj)
  * 
  * @author Eban Delgado
  */
-int Borrar_Objeto_del_Inventario(Inventory inv, int id)
+int Borrar_Objeto_del_Inventario(Inventario inv, int id)
 {
     if (inv==NULL || Esta_vacio_el_Inventario(inv)) 
     {
@@ -104,7 +104,7 @@ int Borrar_Objeto_del_Inventario(Inventory inv, int id)
  * 
  * @author Eban Delgado
  */
-int Esta_vacio_el_Inventario(Inventory inv)
+int Esta_vacio_el_Inventario(Inventario inv)
 {
     if (inv==NULL || inv->next ==NULL) 
     {
@@ -117,7 +117,7 @@ int Esta_vacio_el_Inventario(Inventory inv)
  * @brief Destruye el inventario, si no hay inventario no hace nada
  * @param inv Puntero al inventario
  */
-void Destruir_Inventario(Inventory inv)
+void Destruir_Inventario(Inventario inv)
 {
     if (inv==NULL) 
     {
@@ -144,7 +144,7 @@ void Destruir_Inventario(Inventory inv)
  * 
  * @author Eban Delgado
  */
-void Mostrar_Inventario(Inventory inv)
+void Mostrar_Inventario(Inventario inv)
 {
     if (Esta_vacio_el_Inventario(inv)) {
         printf("El inventario está vacío.\n");
@@ -171,7 +171,7 @@ void Mostrar_Inventario(Inventory inv)
  * 
  * @author Eban Delgado
  */
-Objeto* Encontrar_por_id(Inventory inv, int id)
+Objeto* Encontrar_por_id(Inventario inv, int id)
 {
     if (Esta_vacio_el_Inventario(inv)) {
         return NULL;
@@ -196,7 +196,7 @@ Objeto* Encontrar_por_id(Inventory inv, int id)
  * 
  * @author Eban Delgado
  */
-Objeto* Encontrar_por_nombre(Inventory inv, const char* nombre)
+Objeto* Encontrar_por_nombre(Inventario inv, const char* nombre)
 {
     if (Esta_vacio_el_Inventario(inv) || nombre==NULL) {
         return NULL;

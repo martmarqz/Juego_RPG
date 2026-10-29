@@ -5,7 +5,7 @@
 #include "inventario.h"
 #include "historial.h"
 
-int guardar_partida(Character* jugador, Inventory inv, Stack historial, char* ruta_archivo);
-int cargar_partida(Character* jugador, Inventory inv, Stack historial, char* ruta_archivo);
+int guardar_partida(Jugador* jugador, Inventario inv, Stack historial, char* ruta_archivo);
+int cargar_partida(Jugador* jugador, Inventario inv, Stack historial, char* ruta_archivo);
 
 #endif

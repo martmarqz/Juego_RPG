@@ -94,7 +94,7 @@ int contar_enemigos_espera(cola_enemigo* cola);
  * 
  * @author Martina Marquez
  */
-void iniciar_combate(Character* jugador, Inventory inv, cola_enemigo* cola, Stack historial);
+void iniciar_combate(Jugador* jugador, Inventario inv, cola_enemigo* cola, Stack historial);
 /**
  * @brief  genera enemigos dependiendo la dificultad de la zona
  * 

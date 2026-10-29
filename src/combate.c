@@ -98,21 +98,21 @@ int contar_enemigos_espera(cola_enemigo* cola)
     return contador;
 }
 
-void iniciar_combate(Character* jugador, Inventory inv, cola_enemigo* cola, Stack historial)
+void iniciar_combate(Jugador* jugador, Inventario inv, cola_enemigo* cola, Stack historial)
 {
-    int vida_max = jugador->life; 
+    int vida_max = jugador->vida; 
     int enemigos_espera;
 
     printf("\nCOMBATE\n");
 
-    while (!vacia(cola) && jugador->life > 0) 
+    while (!vacia(cola) && jugador->vida > 0) 
     {
         nodo_enemigo enemigo_actual = desencolar(cola); 
         enemigos_espera = contar_enemigos_espera(cola);
 
-        while (enemigo_actual.vida > 0 && jugador->life > 0) 
+        while (enemigo_actual.vida > 0 && jugador->vida > 0) 
         {
-            printf("\n%s: %d/%d PV | Ataque %d | Defensa %d\n", jugador->name, jugador->life, vida_max, jugador->attack, jugador->defend);
+            printf("\n%s: %d/%d PV | Ataque %d | Defensa %d\n", jugador->nombre, jugador->vida, vida_max, jugador->ataque, jugador->defensa);
             printf("Enemigo actual: %s (%d PV)\n", enemigo_actual.nombre, enemigo_actual.vida);
             printf("Enemigos en espera: %d\n", enemigos_espera);
             printf("1. Atacar\n");
@@ -131,8 +131,8 @@ void iniciar_combate(Character* jugador, Inventory inv, cola_enemigo* cola, Stac
             switch (opcion) 
             {
                 case 1: 
-                    printf("Atacas al %s: %d de dano.\n", enemigo_actual.nombre, jugador->attack);
-                    enemigo_actual.vida -= jugador->attack;
+                    printf("Atacas al %s: %d de dano.\n", enemigo_actual.nombre, jugador->ataque);
+                    enemigo_actual.vida -= jugador->ataque;
                     
                     if (enemigo_actual.vida < 0) enemigo_actual.vida = 0;
                     printf("%s: %d PV.\n", enemigo_actual.nombre, enemigo_actual.vida);
@@ -158,25 +158,25 @@ void iniciar_combate(Character* jugador, Inventory inv, cola_enemigo* cola, Stac
                     {
                         if(obj->tipo == 1)
                         {
-                            printf("Equipas %s. Ataque: %d -> ", obj->nombre, jugador->attack);
-                            jugador->attack += obj->valor_efecto; 
-                            printf("%d.\n", jugador->attack);
+                            printf("Equipas %s. Ataque: %d -> ", obj->nombre, jugador->ataque);
+                            jugador->ataque += obj->valor_efecto; 
+                            printf("%d.\n", jugador->ataque);
                         }
                         else if(obj->tipo == 2)
                         {
                             printf("Usas %s: recuperas %d PV. ", obj->nombre, obj->valor_efecto);
-                            jugador->life += obj->valor_efecto;
-                            if(jugador->life > vida_max)
+                            jugador->vida += obj->valor_efecto;
+                            if(jugador->vida > vida_max)
                             {
-                                jugador->life = vida_max;
+                                jugador->vida = vida_max;
                             }
-                            printf("Aria: %d/%d PV.\n", jugador->life, vida_max);
+                            printf("Aria: %d/%d PV.\n", jugador->vida, vida_max);
                         }
                         else if(obj->tipo == 3)
                         {
-                            printf("Equipas %s. Defensa: %d -> ", obj->nombre, jugador->defend);
-                            jugador->defend += obj->valor_efecto;
-                            printf("%d.\n", jugador->defend);
+                            printf("Equipas %s. Defensa: %d -> ", obj->nombre, jugador->defensa);
+                            jugador->defensa += obj->valor_efecto;
+                            printf("%d.\n", jugador->defensa);
                         }
                         
                         Borrar_Objeto_del_Inventario(inv, id_obj);
@@ -195,17 +195,17 @@ void iniciar_combate(Character* jugador, Inventory inv, cola_enemigo* cola, Stac
 
             if (enemigo_actual.vida > 0) 
             {
-                int dano_recibido = enemigo_actual.ataque - jugador->defend;
+                int dano_recibido = enemigo_actual.ataque - jugador->defensa;
                 if (dano_recibido < 0) dano_recibido = 0; 
 
-                jugador->life -= dano_recibido;
-                if (jugador->life < 0) jugador->life = 0;
+                jugador->vida -= dano_recibido;
+                if (jugador->vida < 0) jugador->vida = 0;
 
-                printf("El %s te ataca: recibes %d de dano. %s: %d/%d PV.\n",enemigo_actual.nombre, dano_recibido, jugador->name, jugador->life, vida_max);
+                printf("El %s te ataca: recibes %d de dano. %s: %d/%d PV.\n",enemigo_actual.nombre, dano_recibido, jugador->nombre, jugador->vida, vida_max);
             }
         }
 
-        if (jugador->life <= 0) 
+        if (jugador->vida <= 0) 
         {
             printf("Has sido derrotado por el %s!\n", enemigo_actual.nombre);
         } 
@@ -222,7 +222,7 @@ void iniciar_combate(Character* jugador, Inventory inv, cola_enemigo* cola, Stac
         }
     }
 
-    if (jugador->life > 0) 
+    if (jugador->vida > 0) 
     {
         printf("Combate terminado!\n");
     }

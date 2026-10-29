@@ -14,8 +14,8 @@
 
 
 
-void explorar_zona(int N, Inventory inv, int zona, Stack s, Character *jugador);
-Objeto obtener_objetos(Inventory inv);
+void explorar_zona(int N, Inventario inv, int zona, Stack s, Jugador *jugador);
+Objeto obtener_objetos(Inventario inv);
 //void encontrar_enemigos();
 //int elegir_zona();
 

@@ -5,7 +5,7 @@
 #include "inventario.h"
 #include "historial.h" 
 
-int guardar_partida(Character* jugador, Inventory inv, Stack historial, char* ruta_archivo) 
+int guardar_partida(Jugador* jugador, Inventario inv, Stack historial, char* ruta_archivo) 
 {
     FILE* archivo = fopen(ruta_archivo, "w");
     if (archivo == NULL) 
@@ -14,8 +14,8 @@ int guardar_partida(Character* jugador, Inventory inv, Stack historial, char* ru
         return 0;
     }
 
-    fprintf(archivo, "%s\n", jugador->name);
-    fprintf(archivo, "%d %d %d\n", jugador->life, jugador->attack, jugador->defend);
+    fprintf(archivo, "%s\n", jugador->nombre);
+    fprintf(archivo, "%d %d %d\n", jugador->vida, jugador->ataque, jugador->defensa);
     
     PtrToNode actual = inv->next;
     while (actual != NULL) 
@@ -39,7 +39,7 @@ int guardar_partida(Character* jugador, Inventory inv, Stack historial, char* ru
     return 1; 
 }
 
-int cargar_partida(Character* jugador, Inventory inv, Stack historial, char* ruta_archivo) 
+int cargar_partida(Jugador* jugador, Inventario inv, Stack historial, char* ruta_archivo) 
 {
     int id_obj, tipo_obj, valor_obj;
     char nombre_obj[100];
@@ -59,21 +59,21 @@ int cargar_partida(Character* jugador, Inventory inv, Stack historial, char* rut
         return 0;
     }
 
-    if (jugador->name != NULL) 
+    if (jugador->nombre != NULL) 
     {
-        free(jugador->name);
+        free(jugador->nombre);
     }
-    jugador->name = (char*)malloc(strlen(buffer_nombre) + 1);
-    if (jugador->name == NULL) 
+    jugador->nombre = (char*)malloc(strlen(buffer_nombre) + 1);
+    if (jugador->nombre == NULL) 
     {
         printf("Error fatal: Memoria insuficiente al cargar nombre.\n");
         fclose(archivo);
         return 0;
     }
 
-    strcpy(jugador->name, buffer_nombre);
+    strcpy(jugador->nombre, buffer_nombre);
 
-    if (fscanf(archivo, "%d %d %d", &jugador->life, &jugador->attack, &jugador->defend) != 3) 
+    if (fscanf(archivo, "%d %d %d", &jugador->vida, &jugador->ataque, &jugador->defensa) != 3) 
     {
         printf("Error: Archivo corrupto al leer atributos del personaje.\n");
         fclose(archivo);

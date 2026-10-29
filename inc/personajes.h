@@ -15,17 +15,17 @@
  * @brief Estructura que representa un personaje.
  * 
  */
-typedef struct _character
+typedef struct _jugador
 {
-    char* name;
-    int life;
-    int attack;
-    int defend;
-} Character;
+    char* nombre;
+    int vida;
+    int ataque;
+    int defensa;
+} Jugador;
 
 
 
 
-Character character_create(char* name);
-void character_print(Character character);
+Jugador jugador_crear(char* nombre);
+void jugador_print(Jugador jugador);
 #endif

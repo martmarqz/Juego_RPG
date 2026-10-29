@@ -1,41 +1,41 @@
 #include "personajes.h"
 
 /**
- * @brief Crea un personaje con atributos por default y name dado por parametro.
+ * @brief Crea un personaje con atributos por default y nombre dado por parametro.
  * 
- * @param name name del personaje.
- * @return character Instancia del personaje
+ * @param nombre nombre del personaje.
+ * @return jugador Instancia del personaje
  */
-Character character_create(char* name){
-    Character character;
+Jugador jugador_crear(char* nombre){
+    Jugador jugador;
 
-    character.name = malloc(strlen(name) + 1 );
-    if(character.name == NULL){
-        printf("Error: No hay memoria disponible para crear name del personaje\n");
-        return character;
+    jugador.nombre = malloc(strlen(nombre) + 1 );
+    if(jugador.nombre == NULL){
+        printf("Error: No hay memoria disponible para crear nombre del personaje\n");
+        return jugador;
     }
 
-    strcpy(character.name, name);
+    strcpy(jugador.nombre, nombre);
 
     /*VARIABLES TEMPORALES*/
-    character.attack = 5;
-    character.defend = 3;
-    character.life = 5;
+    jugador.ataque = 5;
+    jugador.defensa = 3;
+    jugador.vida = 5;
 
-    return character;
+    return jugador;
 }
 
 /**
- * @brief Imprime el estado del personaje: name, puntos de life, attack y defend.
+ * @brief Imprime el estado del personaje: nombre, puntos de life, ataque y defend.
  * 
- * @param character Instancia de personaje.
+ * @param jugador Instancia de personaje.
  */
-void character_print(Character character){
+void jugador_print(Jugador jugador){
 
-    printf("name: [%s]\n", character.name);
-    printf("Puntos de life: [%d]\n",character.life);
-    printf("attack: [%d]\n", character.attack);
-    printf("defend: [%d]\n", character.defend);
+    printf("nombre: [%s]\n", jugador.nombre);
+    printf("Puntos de life: [%d]\n",jugador.vida);
+    printf("ataque: [%d]\n", jugador.ataque);
+    printf("defend: [%d]\n", jugador.defensa);
 
     return;
 }
