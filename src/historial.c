@@ -24,8 +24,12 @@ Stack historial_push(Accion accion, Stack s){
 }
 
 Stack historial_pop(Stack s){
+    if(historial_vacio(s)){
+        printf("Error:historial vacio.\n");
+        return s;
+    }
 
-    Ptr_nodo_historial primero;
+    Ptr_nodo_historial primero = s->siguiente;
     if(historial_vacio(s)){
         printf("Error: historial vacío\n");
         return s;
@@ -35,20 +39,31 @@ Stack historial_pop(Stack s){
     s->siguiente = s->siguiente->siguiente;
     free(primero->accion.desc);
     free(primero->accion.nombre);
+    free(primero->accion.objeto.nombre);
     free(primero);
     return s;
 }
 
-Stack historial_deshacer_accion(Stack s){
+Stack historial_deshacer_accion(Stack s, Inventario inv, Jugador* jugador){
+    Accion *top = historial_top(s);
+
+    if (top == NULL){
+        printf("Error: historial vacío\n");
+        return s;
+    }
     if(historial_vacio(s)){
         printf("Error: historial vacío\n");
         return s;
     }
 
-    if(s->siguiente->accion.tipo == 1){ //< Accion deshacer objeto
+    if(top->tipo == 7 && top->objeto.nombre != NULL){ //< Accion deshacer objeto
+        if (top->objeto.tipo == 1)      jugador->ataque  -= top->objeto.valor_efecto;
+        else if (top->objeto.tipo == 3) jugador->defensa -= top->objeto.valor_efecto;
+        Insertar_Objeto_en_el_Inventario(inv, top->objeto);
+        top->objeto.nombre = NULL;
         printf("Se deshizo la acción. Recuperas el objeto descartado\n");
         historial_pop(s);
-        
+
     }
     else
         printf("No es posible deshacer la última acción\n");
@@ -69,14 +84,13 @@ Stack historial_registrar_accion(Stack s, char* desc, int tipo){
     }
 
     strcpy(nueva.desc, desc);
-
     historial_push(nueva, s);
     return s;
 }
 
 Stack historial_inicializar(){
 
-    Stack s = malloc(sizeof(Nodo_historial));
+    Stack s = calloc(1,sizeof(Nodo_historial));
     if (s == NULL){
         printf("Error: Falta de memoria\n");
         return NULL;
@@ -119,5 +133,13 @@ void historial_print(Stack s){
 void historial_liberar(Stack s){
     while (!historial_vacio(s))
         historial_pop(s);
-    free(s);
+    free(s); 
+}
+
+
+Accion* historial_top(Stack s){
+    if (s == NULL || historial_vacio(s))
+        return NULL;
+
+    return &(s->siguiente->accion);
 }

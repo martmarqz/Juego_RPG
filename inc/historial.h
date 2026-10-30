@@ -4,15 +4,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include "objetos.h"
+#include "inventario.h"
+#include "personajes.h"
 typedef struct _nodo_historial* Ptr_nodo_historial;
 typedef Ptr_nodo_historial Stack;
 
 typedef struct _accion
 {
     int tipo;
-    char * nombre;
+    char* nombre;
     char* desc;
+    Objeto objeto;
 } Accion;
 
 typedef struct _nodo_historial
@@ -75,7 +78,7 @@ void historial_print(Stack s);
  * @param s 
  * @return Stack 
  */
-Stack historial_deshacer_accion(Stack s);
+Stack historial_deshacer_accion(Stack s, Inventario inv, Jugador* jugador);
 
 /**
  * @brief 
@@ -83,4 +86,7 @@ Stack historial_deshacer_accion(Stack s);
  * @param s 
  */
 void historial_liberar(Stack s);
+
+
+Accion* historial_top(Stack s);
 #endif

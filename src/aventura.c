@@ -40,7 +40,7 @@ void explorar_zona(int N, Inventario inv, int zona, Stack s, Jugador *jugador) /
             {
                 case 1:
                     printf("¡Encuentras un objeto en el suelo!\n"); 
-                    obtener_objetos(inv); // < Función obtener objeto
+                    obtener_objetos(inv, s); // < Función obtener objeto
                     break;
                     
                 case 2:
@@ -82,16 +82,15 @@ void explorar_zona(int N, Inventario inv, int zona, Stack s, Jugador *jugador) /
     return;
 }
 
-Objeto obtener_objetos(Inventario inv)
+Objeto obtener_objetos(Inventario inv, Stack s)
 {
     int probabilidad = (rand() % 100) + 1;
-    
     Objeto obj = datos_objetos(probabilidad); 
 
     int opcion = 0;
     printf("Encontraste un objeto en tu trayecto.\n");
     
-    Mostrar_Objeto(obj); 
+    Mostrar_Objeto(obj);
     
     printf("Deseas conservarlo? 1.Si 2.No\n");
     do
@@ -111,10 +110,16 @@ Objeto obtener_objetos(Inventario inv)
     if(opcion == 1){
         printf("Guardas el objeto...\n");
         Insertar_Objeto_en_el_Inventario(inv, obj);
+        
     } 
     else 
     {
-        Borrar_Objeto(obj); 
+        historial_registrar_accion(s,"Se ha descartado un objeto", 6);
+        Accion* a=historial_top(s);
+        if (a != NULL && a->tipo == 6)
+            a->objeto = obj; 
+        else 
+            Borrar_Objeto(obj); 
     }
 
     return obj;

@@ -117,6 +117,7 @@ void iniciar_juego()
                 historial_registrar_accion(historial,"Guardar y salir",5);
                 break;
 
+            
             default:
                 printf("Opcion no valida. Intenta de nuevo.\n");
                 break;

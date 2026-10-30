@@ -112,12 +112,13 @@ void iniciar_combate(Jugador* jugador, Inventario inv, cola_enemigo* cola, Stack
 
         while (enemigo_actual.vida > 0 && jugador->vida > 0) 
         {
-            printf("\n%s: %d/%d PV | Ataque %d | Defensa %d\n", jugador->nombre, jugador->vida, vida_max, jugador->ataque, jugador->defensa);
+            printf("\n%s: %d PV | Ataque %d | Defensa %d\n", jugador->nombre, jugador->vida, jugador->ataque, jugador->defensa);
             printf("Enemigo actual: %s (%d PV)\n", enemigo_actual.nombre, enemigo_actual.vida);
             printf("Enemigos en espera: %d\n", enemigos_espera);
             printf("1. Atacar\n");
             printf("2. Ver inventario\n");
             printf("3. Usar objeto\n");
+            printf("4. Deshacer última acción\n");
             printf("> ");
 
             int opcion;
@@ -179,13 +180,24 @@ void iniciar_combate(Jugador* jugador, Inventario inv, cola_enemigo* cola, Stack
                             printf("%d.\n", jugador->defensa);
                         }
                         
+                        historial_registrar_accion(historial, "Se ha utilizado un objeto", 7);
+                        Accion* a = historial_top(historial);
+
+                        if (a != NULL)
+                            a->objeto = Crear_Objeto(obj->id, obj->nombre, obj->tipo, obj->valor_efecto);
                         Borrar_Objeto_del_Inventario(inv, id_obj);
                     } 
+
                     else 
                     {
                         printf("Objeto no encontrado en el inventario.\n");
                     }
                     
+                    break;
+
+                case 4:
+                    historial_deshacer_accion(historial,inv, jugador);
+
                     break;
 
                 default:
