@@ -34,7 +34,7 @@ void explorar_zona(int N, Inventario inv, int zona, Stack s, Jugador *jugador) /
 
         if(pasos == N) //< Se genera un evento y se rompe el ciclo
         { 
-            int evento = rand()%3+1;
+            int evento = rand()%2+1;
             
             switch (evento)
             {
@@ -50,9 +50,6 @@ void explorar_zona(int N, Inventario inv, int zona, Stack s, Jugador *jugador) /
                     generar_enemigos_zona(&cola_combate, zona);
                     iniciar_combate(jugador, inv, &cola_combate, s);
                     liberar_cola(&cola_combate);
-                    break;
-                case 3:
-                    printf("No encuentras nada\n"); // < No pasa nada              
                     break;
             }
 
